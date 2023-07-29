@@ -4,7 +4,7 @@ package(default_visibility = ["//visibility:private"])
 
 python_library(
     name = "lib",
-    srcs = ["lib.py"],
+    srcs = glob(["*.py"]),
 )
 
 python_binary(
