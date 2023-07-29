@@ -23,8 +23,10 @@ class Game:
         [player.update_regrets(action_profile) for player in self.players]
 
     def train(self, iterations):
-        assert iterations >= 1
+        if iterations < 0:
+            raise Exception("Cannot train - iterations {} invalid".format(iterations))
+
         while self.iteration < iterations:
             self.play_turn()
             self.iteration += 1
-        print("Finished training!")
+        print("Finished training {}".format(iterations))

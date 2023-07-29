@@ -29,25 +29,27 @@ class Player:
 
         raise Exception("Encountered unreachable code")
 
+    def preferred_move(action):
+        if action == constants.Action.ROCK:
+            return constants.Action.PAPER
+
+        if action == constants.Action.PAPER:
+            return constants.Action.SCISSORS
+
+        return constants.Action.ROCK
+
     def update_regrets(self, player_actions):
-        player_move = player_actions[self.name]
         opponent_moves = list(
             {k: v for k, v in player_actions.items() if k != self.name}.values()
         )
         if len(opponent_moves) != 1:
             raise Exception("Missing / too many opponent moves")
 
-        opponent_move = opponent_moves[0]
-        result = constants.GetResult(player_move, opponent_move)
-        preferred_move = constants.FindWinningMove(opponent_move)
-        if result == constants.Result.WIN:
-            return
-
-        self.regret[preferred_move] += 1
+        self.regret[Player.preferred_move(opponent_moves[0])] += 1
 
     def strategy(self):
         total_regret = sum(list(self.regret.values()))
         normalized_regret = {}
         for kv in self.regret.items():
-            normalized_regret[kv[0]] = format(kv[1] / total_regret, ".0%")
+            normalized_regret[kv[0]] = f"{100 * kv[1]/total_regret:2.2f}%"
         return normalized_regret
