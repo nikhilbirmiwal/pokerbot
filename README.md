@@ -6,7 +6,7 @@ Distributed Poker Bot
 
 RPS: `bazel run //src/examples/rps:main`
 
-### References:
+### References
 
 - CMU Papers
 - Gettysburg College Papers
