@@ -1,0 +1,2 @@
+# pokerbot
+Distributed Poker Bot
