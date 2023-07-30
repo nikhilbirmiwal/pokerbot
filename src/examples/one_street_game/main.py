@@ -14,7 +14,5 @@ alice = player.Player("Alice", [constants.Action.CHECK, constants.Action.BET_100
 bob = player.Player(
     "Bob", [constants.Action.CHECK, constants.Action.FOLD, constants.Action.CALL]
 )
-g = game.Game(actions, [alice, bob])
+g = game.Game([alice, bob])
 g.train(100)
-
-print(g)

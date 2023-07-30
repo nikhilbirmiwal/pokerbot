@@ -40,16 +40,10 @@ class Deck:
 
 
 class Game:
-    def __init__(self, actions, players):
-        if (constants.Action.CHECK not in actions) or (
-            constants.Action.FOLD not in actions
-        ):
-            raise Exception("Invalid argument; must contain `CHECK`, `FOLD`")
-
+    def __init__(self, players):
         if len(players) < 2:
             raise Exception("Invalid argument; must specify at least `2` players")
 
-        self.actions = actions
         self.players = players
         self.deck = Deck()
         self.iteration = 0
@@ -65,9 +59,12 @@ class Game:
 
         for p in self.players:
             p_cards = hole_cards[p.name]
+            # TODO: Implement a state machine on valid actions.
             p_action = p.choose_action(hand_history, p_cards)
             hand_history.append(str(p_action))
 
+        # TODO: Compute Payoff Utilities
+        # TODO: Can we support negative payoff utilities? How do we translate payoff utilities into regrets?
         print("Iteration", self.iteration)
         for p in self.players:
             print(p.name, [str(card) for card in hole_cards[p.name]])

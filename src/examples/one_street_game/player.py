@@ -35,6 +35,7 @@ class PlayerMemory:
         self.memory = {}
 
     def node_key(history, hand):
+        # TODO: dedupe (A, B) and (B, A)
         history_str = str([str(x) for x in history])
         hand_str = str([str(x) for x in hand])
         return "{}.{}".format(history_str, hand_str)
