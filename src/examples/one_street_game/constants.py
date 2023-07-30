@@ -15,6 +15,36 @@ class Action(Enum):
     BET_100 = 7
     BET_150 = 8
 
+    def isBet(self):
+        return self in [
+            Action.BET_25,
+            Action.BET_50,
+            Action.BET_75,
+            Action.BET_100,
+            Action.BET_150,
+        ]
+
+    def betSize(self, potSize: int) -> int:
+        if self == Action.CHECK:
+            return 0
+
+        if self == Action.BET_25:
+            return int(0.25 * potSize)
+
+        if self == Action.BET_50:
+            return int(0.5 * potSize)
+
+        if self == Action.BET_75:
+            return int(0.75 * potSize)
+
+        if self == Action.BET_100:
+            return int(1.0 * potSize)
+
+        if self == Action.BET_150:
+            return int(1.5 * potSize)
+
+        raise Exception("Cannot compute pot size for action {}".format(self))
+
 
 class Suit(Enum):
     SPADE = 0
