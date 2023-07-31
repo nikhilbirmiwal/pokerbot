@@ -11,8 +11,11 @@ class Position(Enum):
     MP = 4
     CO = 5
 
+    def __str__(self):
+        return self.name if self != Position.DEALER else "BN"
+
     def next(self) -> Position:
-        return Position.DEALER
+        return Position((self.value + 1) % len(Position))
 
 
 class Action(Enum):
