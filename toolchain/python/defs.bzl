@@ -1,10 +1,11 @@
 # buildifier-ignore-all
 load("@rules_python//python:defs.bzl", "py_binary", "py_library")
 
-def python_library(name, srcs, **kwargs):
+def python_library(srcs, deps = [], name = "lib", **kwargs):
     py_library(
         name = name,
         srcs = srcs,
+        deps = deps,
         **kwargs
     )
 

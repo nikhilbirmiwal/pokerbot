@@ -1,0 +1,33 @@
+# A Poker Game Configuration
+#   Number of Players
+#   Starting Stacks
+
+# Hand: [card]
+
+# Player:
+#   Memory: InfoSet (GameNode, Hand) -> Action -> (payoff, count) (follow up)
+#   Position
+#   Stacksize
+
+
+# PokerAction:
+#   Action (e.g. CHECK)
+#   Actor: Player 
+
+# A Game Node - a combination of public and private information
+# GameNode:
+#   History: PokerAction[]
+#   Community Cards: list[card]
+#   ActivePlayers
+#   CurrentPlayer
+
+# ChanceNode:
+#   deal a card 
+
+# Functions:
+#   is_terminal(node) -> bool
+#   children(node, player) -> list[node]
+#   train loop: 
+#     initialize a hand
+#     traverse some number of paths to terminal nodes 
+#     at each terminal node, compute payoffs for each player   
