@@ -8,7 +8,7 @@ class PlayerState:
     def __init__(self, hand: cards.Hand, player: Player):
         self.hand = hand
         self.player = player
-        self.stackSizeBb = 100  # TODO: plumb this constant through from the Game
+        self.stackSizeBb = 100.0  # TODO: plumb this constant through from the Game
 
     def __str__(self):
         return "{} ({}/{}) with {}bbs".format(
