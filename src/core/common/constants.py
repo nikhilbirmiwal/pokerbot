@@ -13,3 +13,10 @@ class Position(Enum):
 
     def next(self) -> Position:
         return Position.DEALER
+
+
+class Action(Enum):
+    CHECK = "CHECK"
+    CALL = "CALL"
+    FOLD = "FOLD"
+    BET_100 = "B100"

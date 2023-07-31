@@ -32,8 +32,8 @@ class Game:
         return Game(config)
 
     def __training_iteration(self) -> None:
-        node = GameNode()
-        raise NotImplementedError()
+        node = GameNode(self.config.players)
+        print(str(node))
 
     def train(self, iterations: int) -> None:
         while self.iteration < iterations:
