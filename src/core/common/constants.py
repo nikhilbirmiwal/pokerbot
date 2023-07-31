@@ -23,3 +23,27 @@ class Action(Enum):
     CALL = "CALL"
     FOLD = "FOLD"
     BET_100 = "B100"
+
+    def betSize(self, currBetBb: float, potSizeBb: float) -> float | None:
+        if self == Action.CHECK:
+            return 0.0
+
+        if self == Action.CALL:
+            return currBetBb
+
+        if self == Action.BET_100:
+            return potSizeBb
+
+        return None
+
+
+class PlayerState(Enum):
+    NOT_IN_HAND = 0
+    IN_HAND = 1
+
+
+class GameState(Enum):
+    PREFLOP = 0
+    FLOP = 1
+    TURN = 2
+    RIVER = 3

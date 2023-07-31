@@ -32,8 +32,10 @@ class Game:
         return Game(config)
 
     def __training_iteration(self) -> None:
-        node = GameNode(self.config.players)
-        print(str(node))
+        node = GameNode.root()
+        print(("ORIGINAL", str(node)))
+        for c in node.children():
+            print(str(c[0]), str(c[1]))
 
     def train(self, iterations: int) -> None:
         while self.iteration < iterations:
