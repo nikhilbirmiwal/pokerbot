@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from src.core.player.player import Player
 from src.core.tree.game_node import GameNode
-from src.core.tree.node import Node
 
 
 class GameConfiguration:
