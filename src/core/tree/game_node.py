@@ -20,7 +20,7 @@ class PlayerInformation:
 
     def __str__(self):
         if self.playerState == PlayerState.NOT_IN_HAND:
-            return "{}: <>".format(str(self.player))
+            return "<>"
 
         return "({}/{}) with {}bbs".format(
             str(self.hand[0]), str(self.hand[1]), self.stackSizeBb
@@ -87,6 +87,16 @@ class GameNode(Node):
         self.currBetBb = bb
         self.currPlayer = Position.next(self.currPlayer)
 
+    def __doAction(self, action: Action) -> None:
+        if action == Action.FOLD:
+            self.player_information[
+                self.currPlayer
+            ].playerState = PlayerState.NOT_IN_HAND
+            self.currPlayer = Position.next(self.currPlayer)
+        else:
+            betSize = Action.betSize(action, self.currBetBb, self.potSizeBb)
+            self.__doBet(betSize)
+
     def __positions_in_hand(self) -> list[Position]:
         return [
             p
@@ -94,6 +104,8 @@ class GameNode(Node):
             if self.player_information[p].playerState == PlayerState.IN_HAND
         ]
 
+    # TODO(urgent): Switch to an iterator method to avoid blowing out memory usages.
+    # Or don't - we intend on porting this to the cloud.
     def children(self) -> list[tuple[Action, Node]]:
         positions_in_hand = self.__positions_in_hand()
         if all(
@@ -109,12 +121,9 @@ class GameNode(Node):
         )
 
         children: list[tuple[Action, Node]] = []
-        print(self)
         for action in actions:
-            nodeCopy = copy.copy(self)
-            betSize = Action.betSize(action, self.currBetBb, self.potSizeBb)
-            if betSize is not None:
-                nodeCopy.__doBet(betSize)
+            nodeCopy = copy.deepcopy(self)
+            nodeCopy.__doAction(action)
             children.append((action, nodeCopy))
 
         return children

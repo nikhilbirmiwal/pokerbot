@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from src.core.player.player import Player
 from src.core.tree.game_node import GameNode
+from src.core.tree.node import Node
 
 
 class GameConfiguration:
@@ -32,8 +33,17 @@ class Game:
         return Game(config)
 
     def __training_iteration(self) -> None:
+        __cap = 10
         node = GameNode.root()
-        print(("ORIGINAL", str(node)))
+        curr: Node = node
+        count = 0
+        while count < __cap:
+            print(curr)
+            children = curr.children()
+            print(children[0][0])
+            curr = children[0][1]
+            count += 1
+
         for c in node.children():
             print(str(c[0]), str(c[1]))
 

@@ -24,7 +24,7 @@ class Action(Enum):
     FOLD = "FOLD"
     BET_100 = "B100"
 
-    def betSize(self, currBetBb: float, potSizeBb: float) -> float | None:
+    def betSize(self, currBetBb: float, potSizeBb: float) -> float:
         if self == Action.CHECK:
             return 0.0
 
@@ -34,7 +34,7 @@ class Action(Enum):
         if self == Action.BET_100:
             return potSizeBb
 
-        return None
+        raise ValueError("Cannot compute bet size for action {}".format(self))
 
 
 class PlayerState(Enum):
