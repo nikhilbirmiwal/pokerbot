@@ -33,17 +33,7 @@ class Game:
         return Game(config)
 
     def __training_iteration(self) -> None:
-        __cap = 10
         node = GameNode.root()
-        curr: Node = node
-        count = 0
-        while count < __cap:
-            print(curr)
-            children = curr.children()
-            print(children[0][0])
-            curr = children[0][1]
-            count += 1
-
         for c in node.children():
             print(str(c[0]), str(c[1]))
 
